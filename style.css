@@ -1,0 +1,18 @@
+body {
+    background-image: url(image/bg-soleil-mobile.png);
+
+}
+
+.partieCentral {
+    width: 80%;
+    background-color: rgb(108, 126, 164);
+    height: 23rem;
+}
+
+.température {
+    font-size: 3rem;
+}
+
+#description {
+    color: rgb(183, 221, 247);
+}
