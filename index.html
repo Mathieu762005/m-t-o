@@ -14,8 +14,7 @@
 <body>
     <main>
         <div class="text-center pt-2 text-white" id="partiePrincipale">
-            <h1 class="fs-1 pb-5" id="heure"></h1>
-            <h1 class="fs-1" id="city"></h1>
+            <h1 class="fs-1 pt-5" id="city"></h1>
             <h1 class="température" id="température"></h1>
             <p class="fs-5 fw-bold m-0" id="description"></p>
             <div class="d-flex justify-content-center">
@@ -37,7 +36,63 @@
                 <script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = []; window.myWidgetParam.push({ id: 12, cityid: '3013633', appid: 'f85211be34b149d5fb745f44e506ac7b', units: 'metric', containerid: 'openweathermap-widget-12', }); (function () { var script = document.createElement('script'); script.async = true; script.charset = "utf-8"; script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js"; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s); })();</script>
             </div>
         </div>
+        <div class="partiePrévision mx-auto mt-3 rounded-2">
+            <h4 class="text-center text-white">PREVISIONS SUR 5 JOURS</h3>
+                <div class="partiePrévisionWidth border-top mx-auto">
+                    <div class="jours">
+
+                    </div>
+                    <div class="icon">
+
+                    </div>
+                    <div class="temp">
+
+                    </div>               
+                </div>
+                <div class="partiePrévisionWidth border-top mx-auto">
+                    <div id="jours">
+
+                    </div>
+                    <div id="icon">
+
+                    </div>
+                    <div id="temp">
+
+                    </div>
+                </div>
+                <div class="partiePrévisionWidth border-top mx-auto">
+                    <div id="jours">
+
+                    </div>
+                    <div id="icon">
+
+                    </div>
+                    <div id="temp">
+
+                    </div>
+                </div>
+                <div class="partiePrévisionWidth border-top mx-auto">
+                    <div id="jours">
+
+                    </div>
+                    <div id="icon">
+
+                    </div>
+                    <div id="temp">
+
+                    </div>
+                </div>
+                <div class="partiePrévisionWidth border-top mx-auto">
+                    <div class="jours">
+
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+        </div>
     </main>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>

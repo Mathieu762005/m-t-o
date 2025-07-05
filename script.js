@@ -6,7 +6,6 @@ fetch(url)
     .then(data => {
         console.log(data)
         console.log(data.city.name)
-        document.getElementById("heure").innerHTML = `${data.list[0].dt_txt}`
         document.getElementById("city").innerHTML = `Le ${data.city.name}`
         document.getElementById("température").innerHTML = `  ${Math.round(data.list[0].main.temp)}°`
         document.getElementById("description").innerHTML = `${data.list[0].weather[0].description}`
@@ -17,3 +16,9 @@ fetch(url)
         document.getElementById("précipitation").innerHTML = `<i class="bi bi-tornado"></i> ${data.list[0].pop}%`
         document.getElementById("humidity").innerHTML = `<i class="bi bi-droplet-half"></i> ${data.list[0].main.humidity}%`
     })
+
+if (description = "légère pluie") {
+    document.body.style.backgroundImage = "url(image/bg-soleil-mobile.png)"
+} else {
+    document.body.style.backgroundImage = "url(image/bg-pluie-mobile.png);"
+}
