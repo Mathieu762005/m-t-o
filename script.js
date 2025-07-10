@@ -55,7 +55,7 @@ function success(position) {
             if (city) {
                 recherche(city)
             } else {
-                alert("Ville non détectée par géolocalisation.")
+                alert("erreur")
             }
         })
 }
