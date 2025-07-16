@@ -15,7 +15,6 @@ function recherche(city) {
             return
         }
     }
-    // console.log(city)
     document.getElementById("offcanvasWithBothOptions").innerHTML = `
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">villes favorites</h5>
@@ -61,6 +60,11 @@ function recherche(city) {
                 document.body.style.backgroundImage = "url(image/bg-soleil-mobile.png)"
             }
         })
+    let list = ""
+    JSON.parse(localStorage.getItem("favoris")).forEach(city => {
+        list += `<ul class="text-decoration-none list-unstyled"><li>${city}</li></ul>`
+        document.getElementById("list").innerHTML = list
+    })
 }
 
 function success(position) {
@@ -86,16 +90,16 @@ function error() {
 function favoris() {
     let city = document.getElementById("ville").value
     let favoris = JSON.parse(localStorage.getItem("favoris")) || []
+    let list = ""
     console.log(typeof (favoris))
     console.log(typeof (city))
     favoris.push(city)
     localStorage.setItem("favoris", JSON.stringify(favoris))
 
-    let list = ""
-    favoris.forEach(city => {
+    JSON.parse(localStorage.getItem("favoris")).forEach(city => {
         list += `<ul class="text-decoration-none list-unstyled"><li>${city}</li></ul>`
         document.getElementById("list").innerHTML = list
-    });
+    })
 }
 
 // Géolocalisation //
