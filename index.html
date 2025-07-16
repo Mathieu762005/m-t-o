@@ -13,10 +13,17 @@
 
 <body>
     <main>
+        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+            aria-labelledby="offcanvasWithBothOptionsLabel">
+        </div>
         <div class="text-center pt-2 text-white" id="partiePrincipale">
-            <div class="recherche text-center mx-auto d-flex justify-content-around p-2 rounded-5">
-                <input type="text" class="input rounded-5 border-0 text-white" placeholder="ville" id="ville">
-                <button class="bouton border-0" onclick="recherche()"><i class="bi bi-search"></i></button>
+            <div class="d-flex px-3">
+                <button id="favoris" class="btn bg-primary text-warning fs-3" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="bi bi-star-fill"></i></button>
+                <div class="recherche text-center mx-auto d-flex justify-content-around p-2 rounded-5">
+                    <input type="text" class="input rounded-5 border-0 text-white" placeholder="ville" id="ville">
+                    <button class="bouton border-0" onclick="recherche()"><i class="bi bi-search"></i></button>
+                </div>
             </div>
             <h1 class="fs-1 pt-5" id="city"></h1>
             <h1 class="température" id="température"></h1>
@@ -105,4 +112,4 @@
     <script src="script.js"></script>
 </body>
 
-</html> 
+</html>

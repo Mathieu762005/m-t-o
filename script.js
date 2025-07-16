@@ -1,4 +1,11 @@
 const apiKey = 'f85211be34b149d5fb745f44e506ac7b'
+const options = {
+    enableHighAccuracy: true,
+    timeout: 10000,
+    maximumAge: 30000,
+}
+
+
 
 function recherche(city) {
     if (!city) {
@@ -8,6 +15,16 @@ function recherche(city) {
             return
         }
     }
+    // console.log(city)
+    document.getElementById("offcanvasWithBothOptions").innerHTML = `
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">villes favorites</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body" onclick="favoris()">
+                <button class="btn btn-danger"><i class="bi bi-star-fill"></i> ${city}</button>
+            </div>
+            `
 
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&lang=fr&units=metric`
 
@@ -64,12 +81,17 @@ function error() {
     alert("position invalide.")
 }
 
-const options = {
-    enableHighAccuracy: true,
-    timeout: 10000,
-    maximumAge: 30000,
+function favoris() {
+    let city = document.getElementById("ville").value
+    let favoris = JSON.parse(localStorage.getItem("favoris")) || []
+    console.log(typeof (favoris))
+    console.log(typeof (city))
+    favoris.push(city)
+    localStorage.setItem("favoris", JSON.stringify(favoris))
 }
 
+
+// Géolocalisation //
 window.addEventListener("load", () => {
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(success, error, options)
