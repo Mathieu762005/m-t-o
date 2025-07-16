@@ -24,6 +24,8 @@ function recherche(city) {
             <div class="offcanvas-body" onclick="favoris()">
                 <button class="btn btn-danger"><i class="bi bi-star-fill"></i> ${city}</button>
             </div>
+            <div class="list-group list-group-flush" id="list">
+            </div>
             `
 
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&lang=fr&units=metric`
@@ -88,8 +90,13 @@ function favoris() {
     console.log(typeof (city))
     favoris.push(city)
     localStorage.setItem("favoris", JSON.stringify(favoris))
-}
 
+    let list = ""
+    favoris.forEach(city => {
+        list += `<ul class="text-decoration-none list-unstyled"><li>${city}</li></ul>`
+        document.getElementById("list").innerHTML = list
+    });
+}
 
 // Géolocalisation //
 window.addEventListener("load", () => {
