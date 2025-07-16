@@ -75,7 +75,7 @@ function recherche(city) {
         })
 
     // Affichage Favoris // 
-    afficherFavoris()  
+    afficherFavoris()
 }
 
 
@@ -116,16 +116,35 @@ function favoris() {
 
 // Affichage Favoris //
 function afficherFavoris() {
+    document.getElementById("list").innerHTML = ""
     let list = ""
     JSON.parse(localStorage.getItem("favoris")).forEach(city => {
         list += `<ul class="text-decoration-none border list-unstyled">
-                  <li onclick="recherche('${city}')" class="fw-bold p-1">
-                    <i class="bi bi-star-fill text-warning"></i> ${city}
+                  <li class="fw-bold d-flex justify-content-between p-1">
+                    <div onclick="recherche('${city}')">
+                      <i class="bi bi-star-fill text-warning"></i> ${city}
+                    </div>
+                    <div onclick="deleteFavoris('${city}')" class="poubelle">
+                      <i class="bi bi-trash3"></i>
+                    </div>
                   </li>
                 </ul>`
         document.getElementById("list").innerHTML = list
     })
 }
 
+function deleteFavoris(city) {
 
+    let favoris = JSON.parse(localStorage.getItem("favoris"))
+    let index = favoris.indexOf(city)
+    favoris.splice(index, 1)
+    localStorage.setItem("favoris", JSON.stringify(favoris))
 
+    afficherFavoris()
+}
+
+document.addEventListener('keydown', event => {
+    if (event.key === 'Enter') {
+        recherche()
+    }
+})
