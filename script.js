@@ -74,12 +74,8 @@ function recherche(city) {
             }
         })
 
-    // Affichage Favoris //    
-    let list = ""
-    JSON.parse(localStorage.getItem("favoris")).forEach(city => {
-        list += `<ul class="text-decoration-none border list-unstyled"><li class="fw-bold p-1"><i class="bi bi-star-fill text-warning"></i> ${city}</li></ul>`
-        document.getElementById("list").innerHTML = list
-    })
+    // Affichage Favoris // 
+    afficherFavoris()  
 }
 
 
@@ -98,37 +94,38 @@ function success(position) {
             }
         })
 }
-
+// ApiVille //
 function error() {
     alert("position invalide.")
 }
 
+// localStoragel //
 function favoris() {
 
     // localStorage //
     let city = document.getElementById("ville").value
     let favoris = JSON.parse(localStorage.getItem("favoris")) || []
-    let list = ""
     console.log(typeof (favoris))
     console.log(typeof (city))
     favoris.push(city)
     localStorage.setItem("favoris", JSON.stringify(favoris))
 
     // affichageListFavoris //
+    afficherFavoris()
+}
+
+// Affichage Favoris //
+function afficherFavoris() {
+    let list = ""
     JSON.parse(localStorage.getItem("favoris")).forEach(city => {
         list += `<ul class="text-decoration-none border list-unstyled">
-                   <li onclick="recherche()" class="fw-bold p-1">
-                     <i class="bi bi-star-fill text-warning"></i> ${city}
-                   </li>
-                 </ul>`
+                  <li onclick="recherche('${city}')" class="fw-bold p-1">
+                    <i class="bi bi-star-fill text-warning"></i> ${city}
+                  </li>
+                </ul>`
         document.getElementById("list").innerHTML = list
     })
 }
-
-// function rechercheFavoris() {
-
-// }
-
 
 
 
