@@ -37,3 +37,7 @@
     color: rgb(171, 171, 171);
     font-weight: bold;
 }
+
+.test {
+    width: 60vw !important;
+}

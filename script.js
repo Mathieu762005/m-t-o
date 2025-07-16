@@ -1,10 +1,21 @@
 const apiKey = 'f85211be34b149d5fb745f44e506ac7b'
 const options = {
     enableHighAccuracy: true,
-    timeout: 10000,
+    timeout: 500,
     maximumAge: 30000,
 }
 
+letsBegin()
+
+// Géolocalisation //
+function letsBegin() {
+    console.log('je cherche')
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(success, error, options)
+    } else {
+        alert("Géolocalisation invalide.")
+    }
+}
 
 function recherche(city) {
     // Récuperation de input //
@@ -21,10 +32,10 @@ function recherche(city) {
                 <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">villes favorites</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body" onclick="favoris()">
+            <div class="ps-3" onclick="favoris()">
                 <button class="btn btn-danger"><i class="bi bi-star-fill"></i> ${city}</button>
             </div>
-            <div class="list-group list-group-flush" id="list">
+            <div class="list-group px-3 pt-4 list-group-flush" id="list">
             </div>
             `
     // Affichage data dans le Dom //
@@ -66,7 +77,7 @@ function recherche(city) {
     // Affichage Favoris //    
     let list = ""
     JSON.parse(localStorage.getItem("favoris")).forEach(city => {
-        list += `<ul class="text-decoration-none list-unstyled"><li>${city}</li></ul>`
+        list += `<ul class="text-decoration-none border list-unstyled"><li class="fw-bold p-1"><i class="bi bi-star-fill text-warning"></i> ${city}</li></ul>`
         document.getElementById("list").innerHTML = list
     })
 }
@@ -76,11 +87,10 @@ function recherche(city) {
 function success(position) {
     const latitude = position.coords.latitude
     const longitude = position.coords.longitude
-
-    fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`)
         .then(response => response.json())
         .then(data => {
-            const city = data.address.city || data.address.town || data.address.village || null
+            const city = data.name
             if (city) {
                 recherche(city)
             } else {
@@ -88,6 +98,7 @@ function success(position) {
             }
         })
 }
+
 function error() {
     alert("position invalide.")
 }
@@ -105,16 +116,19 @@ function favoris() {
 
     // affichageListFavoris //
     JSON.parse(localStorage.getItem("favoris")).forEach(city => {
-        list += `<ul class="text-decoration-none list-unstyled"><li>${city}</li></ul>`
+        list += `<ul class="text-decoration-none border list-unstyled">
+                   <li onclick="recherche()" class="fw-bold p-1">
+                     <i class="bi bi-star-fill text-warning"></i> ${city}
+                   </li>
+                 </ul>`
         document.getElementById("list").innerHTML = list
     })
 }
 
-// Géolocalisation //
-window.addEventListener("load", () => {
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(success, error, options)
-    } else {
-        alert("Géolocalisation invalide.")
-    }
-})
+// function rechercheFavoris() {
+
+// }
+
+
+
+
