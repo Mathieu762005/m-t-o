@@ -6,8 +6,8 @@ const options = {
 }
 
 
-
 function recherche(city) {
+    // Récuperation de input //
     if (!city) {
         city = document.getElementById("ville").value
         if (!city) {
@@ -15,6 +15,7 @@ function recherche(city) {
             return
         }
     }
+    // Affichage Offcanvas // 
     document.getElementById("offcanvasWithBothOptions").innerHTML = `
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">villes favorites</h5>
@@ -26,7 +27,7 @@ function recherche(city) {
             <div class="list-group list-group-flush" id="list">
             </div>
             `
-
+    // Affichage data dans le Dom //
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&lang=fr&units=metric`
 
     fetch(url)
@@ -53,6 +54,7 @@ function recherche(city) {
             document.getElementById("jours5").innerHTML = `${data.list[38].dt_txt}`
             document.getElementById("temp5").innerHTML = `${Math.round(data.list[38].main.temp)}°`
 
+            // Affichage Background sous condition //
             let description = data.list[0].weather[0].description
             if (description.includes("pluie")) {
                 document.body.style.backgroundImage = "url(image/bg-pluie-mobile.png)"
@@ -60,6 +62,8 @@ function recherche(city) {
                 document.body.style.backgroundImage = "url(image/bg-soleil-mobile.png)"
             }
         })
+
+    // Affichage Favoris //    
     let list = ""
     JSON.parse(localStorage.getItem("favoris")).forEach(city => {
         list += `<ul class="text-decoration-none list-unstyled"><li>${city}</li></ul>`
@@ -67,6 +71,8 @@ function recherche(city) {
     })
 }
 
+
+// ApiVille //
 function success(position) {
     const latitude = position.coords.latitude
     const longitude = position.coords.longitude
@@ -82,12 +88,13 @@ function success(position) {
             }
         })
 }
-
 function error() {
     alert("position invalide.")
 }
 
 function favoris() {
+
+    // localStorage //
     let city = document.getElementById("ville").value
     let favoris = JSON.parse(localStorage.getItem("favoris")) || []
     let list = ""
@@ -96,6 +103,7 @@ function favoris() {
     favoris.push(city)
     localStorage.setItem("favoris", JSON.stringify(favoris))
 
+    // affichageListFavoris //
     JSON.parse(localStorage.getItem("favoris")).forEach(city => {
         list += `<ul class="text-decoration-none list-unstyled"><li>${city}</li></ul>`
         document.getElementById("list").innerHTML = list
